@@ -1,5 +1,6 @@
 (function () {
   const config = window.PARTY_MASHUP_CONFIG || {};
+  const supabaseKey = config.SUPABASE_PUBLISHABLE_KEY || config.SUPABASE_ANON_KEY;
   const form = document.querySelector("#creator-request-form");
   const status = document.querySelector("#form-status");
 
@@ -13,7 +14,7 @@
   }
 
   function hasSupabaseConfig() {
-    return Boolean(config.SUPABASE_URL && config.SUPABASE_ANON_KEY);
+    return Boolean(config.SUPABASE_URL && supabaseKey);
   }
 
   if (!form) {
@@ -21,7 +22,7 @@
   }
 
   if (!hasSupabaseConfig()) {
-    setStatus("Add website/config.js with your Supabase URL and anon key to enable this form.", false);
+    setStatus("Add website/config.js with your Supabase URL and publishable key to enable this form.", false);
   }
 
   form.addEventListener("submit", async (event) => {
@@ -72,7 +73,7 @@
     };
 
     try {
-      const client = window.supabase.createClient(config.SUPABASE_URL, config.SUPABASE_ANON_KEY);
+      const client = window.supabase.createClient(config.SUPABASE_URL, supabaseKey);
       const result = await client.from("creator_requests").insert(payload);
 
       if (result.error) {

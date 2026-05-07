@@ -19,10 +19,10 @@ If system Python is not available, use the bundled Codex runtime Python path or 
 2. Copy `website/config.example.js` to `website/config.js`.
 3. Fill in:
    - `SUPABASE_URL`
-   - `SUPABASE_ANON_KEY`
-4. Do not commit `website/config.js` if it contains a real project URL and anon key.
+   - `SUPABASE_PUBLISHABLE_KEY`
+4. Do not commit `website/config.js` if it contains a real project URL and publishable key.
 
-The anon key is safe to use in the browser when Row Level Security is enabled. The migration allows public inserts into `creator_requests` but does not allow public reads.
+The publishable key is safe to use in the browser when Row Level Security is enabled. The migration allows public inserts into `creator_requests` but does not allow public reads.
 
 ## Deployment
 
